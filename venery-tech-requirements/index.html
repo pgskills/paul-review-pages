@@ -1,0 +1,435 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Venery Technology Requirements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #E7E2D3;
+    --bg-panel: #F5F2E8;
+    --bg-panel-alt: #EFEBDD;
+    --ink: #23281E;
+    --ink-soft: #565C4B;
+    --ink-faint: #8A8E77;
+    --accent: #8A5A28;
+    --accent-2: #3F5B4E;
+    --accent-2-soft: #E4EAE3;
+    --line: #C9C1A8;
+    --line-strong: #A79E82;
+    --open: #B24A2E;
+    --open-soft: #F3E1D8;
+    --biz: #3F5B4E;
+    --biz-soft: #E4EAE3;
+    --mem: #8A5A28;
+    --mem-soft: #F0E6D6;
+    --shadow: 0 1px 2px rgba(35,40,30,0.06);
+  }
+
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg: #14170F;
+      --bg-panel: #1C2016;
+      --bg-panel-alt: #21261A;
+      --ink: #E9E4D3;
+      --ink-soft: #ABAF98;
+      --ink-faint: #767A64;
+      --accent: #D3A05C;
+      --accent-2: #8FB09D;
+      --accent-2-soft: #263229;
+      --line: #383D2C;
+      --line-strong: #4C523B;
+      --open: #E38B67;
+      --open-soft: #3A241C;
+      --biz: #8FB09D;
+      --biz-soft: #232B24;
+      --mem: #D3A05C;
+      --mem-soft: #2E2718;
+      --shadow: 0 1px 3px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14170F; --bg-panel: #1C2016; --bg-panel-alt: #21261A;
+    --ink: #E9E4D3; --ink-soft: #ABAF98; --ink-faint: #767A64;
+    --accent: #D3A05C; --accent-2: #8FB09D; --accent-2-soft: #263229;
+    --line: #383D2C; --line-strong: #4C523B; --open: #E38B67; --open-soft: #3A241C;
+    --biz: #8FB09D; --biz-soft: #232B24; --mem: #D3A05C; --mem-soft: #2E2718;
+    --shadow: 0 1px 3px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+    padding: clamp(20px, 4vw, 56px);
+  }
+  .page { max-width: 980px; margin: 0 auto; }
+
+  header {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end;
+    gap: 24px; padding-bottom: 22px; margin-bottom: 28px; border-bottom: 2px solid var(--ink);
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
+  }
+  h1 {
+    font-family: "Zilla Slab", Georgia, serif; font-weight: 700; font-size: clamp(30px, 4.5vw, 46px);
+    line-height: 1; margin: 0 0 12px; text-wrap: balance; letter-spacing: -0.01em;
+  }
+  .thesis {
+    font-family: "Zilla Slab", Georgia, serif; font-style: italic; font-weight: 500; font-size: 16px;
+    line-height: 1.5; color: var(--ink-soft); max-width: 60ch; text-wrap: balance; margin: 0;
+  }
+  .meta {
+    text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11.5px;
+    color: var(--ink-faint); line-height: 1.7; white-space: nowrap;
+  }
+
+  .framing {
+    background: var(--bg-panel); border: 1px solid var(--line-strong); border-radius: 6px;
+    padding: 18px 22px; margin-bottom: 32px; font-size: 13.5px; line-height: 1.6; color: var(--ink-soft);
+  }
+  .framing strong { color: var(--ink); }
+  .framing p { margin: 0 0 10px; }
+  .framing p:last-child { margin-bottom: 0; }
+
+  h2.section {
+    font-family: "Zilla Slab", Georgia, serif; font-weight: 700; font-size: 24px;
+    margin: 48px 0 6px; padding-top: 20px; border-top: 2px solid var(--ink);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  h2.section .step {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; color: var(--accent);
+    font-weight: 600; letter-spacing: 0.05em;
+  }
+  .section-sub { font-size: 13.5px; color: var(--ink-faint); margin: 0 0 22px; max-width: 68ch; }
+
+  h3.sub {
+    font-family: "Zilla Slab", Georgia, serif; font-weight: 600; font-size: 17px; margin: 28px 0 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .badge {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
+  }
+  .badge.biz { background: var(--biz-soft); color: var(--biz); }
+  .badge.mem { background: var(--mem-soft); color: var(--mem); }
+
+  .req-list { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .req-list li {
+    padding: 12px 16px; background: var(--bg-panel); border: 1px solid var(--line); border-radius: 5px;
+    font-size: 13.6px; line-height: 1.5;
+  }
+  .req-list li strong { font-weight: 600; }
+  .req-list .why { display: block; margin-top: 4px; font-size: 12.5px; color: var(--ink-faint); font-style: italic; }
+
+  .req-list.biz li { border-left: 3px solid var(--biz); }
+  .req-list.mem li { border-left: 3px solid var(--mem); }
+
+  table.fields {
+    width: 100%; border-collapse: collapse; margin: 10px 0 0; font-size: 13px;
+  }
+  table.fields th, table.fields td {
+    text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top;
+  }
+  table.fields th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-faint); font-weight: 600;
+  }
+  table.fields td.fname { font-weight: 600; white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+
+  .entity {
+    background: var(--bg-panel-alt); border: 1px solid var(--line); border-radius: 6px;
+    padding: 16px 20px 18px; margin: 18px 0;
+  }
+  .entity h4 {
+    font-family: "Zilla Slab", Georgia, serif; font-size: 16px; margin: 0 0 2px;
+  }
+  .entity .purpose { font-size: 12.5px; color: var(--ink-faint); font-style: italic; margin: 0 0 4px; }
+
+  .flow {
+    counter-reset: step; list-style: none; margin: 12px 0 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .flow li {
+    counter-increment: step; position: relative; padding: 10px 0 10px 34px; font-size: 13.4px; line-height: 1.5;
+    border-left: 2px solid var(--line-strong); margin-left: 10px;
+  }
+  .flow li:last-child { border-left: 2px solid transparent; }
+  .flow li::before {
+    content: counter(step); position: absolute; left: -11px; top: 8px; width: 20px; height: 20px;
+    background: var(--accent-2); color: var(--bg-panel); border-radius: 50%;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .flow-title {
+    font-family: "Zilla Slab", Georgia, serif; font-weight: 600; font-size: 16px; margin: 26px 0 2px;
+  }
+  .flow-solves {
+    display: inline-block; margin: 2px 0 6px; font-size: 11.5px; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    color: var(--open); background: var(--open-soft); padding: 2px 8px; border-radius: 999px;
+  }
+
+  .note {
+    border: 1px dashed var(--line-strong); border-radius: 4px; padding: 14px 16px; font-size: 12.5px;
+    line-height: 1.55; color: var(--ink-soft); margin-top: 14px;
+  }
+  .note strong {
+    display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px;
+  }
+
+  footer.doc-footer {
+    margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
+    font-size: 11.5px; color: var(--ink-faint); font-family: "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  @media (max-width: 700px) {
+    header { flex-direction: column; align-items: flex-start; }
+    .meta { text-align: left; }
+  }
+</style>
+
+<div class="page">
+  <header>
+    <div>
+      <p class="eyebrow">Technology Requirements &middot; Discussion Draft</p>
+      <h1>Venery Technology Requirements</h1>
+      <p class="thesis">What the system needs to do, and what it needs to remember about each member and event &mdash; before any conversation about which platform does it.</p>
+    </div>
+    <div class="meta">
+      Founder &mdash; Alex Stokman<br>
+      Prepared with Paul Gladen<br>
+      2026&#8209;09&#8209;07 &middot; v1
+    </div>
+  </header>
+
+  <div class="framing">
+    <p><strong>What this is:</strong> a requirements list, not a product recommendation. Nothing here names a platform or compares options. The goal is to agree on what the system needs to do and what it needs to remember, so that whatever gets evaluated next (existing tools, a different combination of them, or something custom-built) gets judged against the same list.</p>
+    <p><strong>Two levels:</strong> <strong>Part 1</strong> is business and member requirements in plain language, the kind of thing to react to and correct. <strong>Part 2</strong> gets more specific: the actual pieces of information the system would need to track, and the everyday sequences (someone registers, someone joins, someone refers a friend) those pieces of information have to support. Part 2 is where today's real problems, like an event registrant who never shows up as a subscriber, actually get solved or not.</p>
+    <p><strong>Leaving feedback:</strong> select any text on this page to highlight it and add a note. The sidebar icon on the right opens the full list of notes.</p>
+  </div>
+
+  <h2 class="section"><span class="step">PART 1</span> Business &amp; Member Requirements</h2>
+  <p class="section-sub">Two different audiences, two different lists. Some things (the website) serve both and aren't forced into either column.</p>
+
+  <h3 class="sub">Foundational</h3>
+  <ul class="req-list">
+    <li><strong>Public-facing website</strong> &mdash; program information, marketing pages. Serves both audiences; not treated as "business" or "member" on its own.</li>
+  </ul>
+
+  <h3 class="sub"><span class="badge biz">Business</span> What Venery needs to run itself</h3>
+  <ul class="req-list biz">
+    <li><strong>One customer record per person</strong>, not one per system.<span class="why">Directly from Alex's own notes: an event registrant who doesn't subscribe is invisible to Klaviyo, and Wix never passes registration data like address into a customer profile at all. Both are the same underlying gap.</span></li>
+    <li><strong>Event &amp; program registration</strong>, with payment.<span class="why">Currently Wix Events.</span></li>
+    <li><strong>Two kinds of payment, handled differently:</strong> one-time (tickets, merch) and recurring (membership dues).<span class="why">Recurring billing brings renewals, failed payments, and proration, none of which one-time ticket sales need to solve.</span></li>
+    <li><strong>Email marketing &amp; lifecycle automation.</strong><span class="why">Currently Klaviyo.</span></li>
+    <li><strong>Relationship &amp; activity tracking</strong>, separate from marketing.<span class="why">Klaviyo is a genuine CRM in the sense that it centralizes customer data and lifecycle messaging. By its own positioning, it doesn't track pipelines, relationship history, or ongoing activity. That's the specific gap: nowhere to record "we're in exploratory talks with this instructor" or "this vendor asked for different terms last month."</span></li>
+    <li><strong>Membership administration:</strong> tiers, access control, renewals, discount eligibility.</li>
+    <li><strong>Instructor management:</strong> who's available, what they teach, how they're compensated &mdash; tied to specific course and event delivery.<span class="why">Ties to the build-out roadmap's growing instructor bench, sourced from members and from outside.</span></li>
+    <li><strong>Partner relationship management:</strong> identifying and tracking retail/commission partners and social media influencers, separate from instructors.<span class="why">A retail partner or influencer is a different kind of relationship than an instructor: no course to deliver, no availability to schedule, just a commercial arrangement. Managing both the same way loses that distinction.</span></li>
+    <li><strong>Referral &amp; commission tracking</strong> for vendor, outfitter, and influencer partners.<span class="why">The Business Model Canvas names this as how the connector role actually monetizes. It doesn't work without a way to attribute a signup to a specific partner.</span></li>
+    <li><strong>Reporting that answers specific questions</strong>, not just totals.<span class="why">The roadmap already commits to tracking renewal/repeat-engagement rate and channel conversion rate at the end of Phase 2, not total sign-ups. Whatever system gets built needs to be able to produce those two numbers specifically.</span></li>
+    <li><strong>Privacy &amp; access controls</strong> over member data.<span class="why">This is a women's group whose members will be sharing location and meeting people in person. Visibility needs to default to controlled, not open.</span></li>
+  </ul>
+
+  <h3 class="sub"><span class="badge mem">Member</span> What a member actually needs</h3>
+  <ul class="req-list mem">
+    <li><strong>Easy registration</strong> for classes, courses, and camps.</li>
+    <li><strong>A clear view of membership benefits</strong> and what tier they're in.</li>
+    <li><strong>Finding other members</strong> by interest, location, or experience level.</li>
+    <li><strong>Talking to each other directly</strong> &mdash; chat or discussion, not just receiving Venery's email.</li>
+    <li><strong>Organizing their own activities</strong> &mdash; a coffee, a hike, a hunt &mdash; without needing Venery to run it as a formal program.</li>
+    <li><strong>Sharing resources and tips</strong> with each other, not only receiving content Alex wrote.</li>
+    <li><strong>Access to course/curriculum content</strong> if it lives online rather than only live.</li>
+    <li><strong>Control over their own visibility</strong> &mdash; deciding what other members can see about them.</li>
+  </ul>
+
+  <h2 class="section"><span class="step">PART 2</span> Data &amp; Workflows</h2>
+  <p class="section-sub">The actual pieces of information the system needs to hold, and the everyday sequences that use them. This is where "sounds right in principle" becomes "does this actually work when someone registers for a class."</p>
+
+  <h3 class="sub">Core data</h3>
+  <p class="section-sub">One principle underneath everything below: a real person gets exactly one Person record, ever, no matter how many roles they take on. Membership, teaching, and volunteering are separate records that <em>link to</em> that one Person, not separate profiles that duplicate them. The same logic separates people from organizations: a company or nonprofit isn't a person with a business name, it's a different kind of record, and the two connect through their own link rather than a field on either side, since one organization can have several contacts and one person can represent more than one organization.</p>
+
+  <div class="entity">
+    <h4>Person / Contact</h4>
+    <p class="purpose">The one record for every individual human Venery has any relationship with: a member, an instructor, a volunteer, a prospect. Membership and Instructor Engagement records link to this one; they never replace it.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Name, email, phone, mailing address</td><td>Address is specifically the field Alex says is captured by Wix Events but never reaches the customer profile</td></tr>
+      <tr><td class="fname">How they found Venery</td><td>Feeds the channel-conversion metric the roadmap already committed to measuring</td></tr>
+      <tr><td class="fname">Date first engaged</td><td>First-touch date, for measuring the actual funnel rather than guessing at it</td></tr>
+      <tr><td class="fname">Hunting experience level</td><td>Beginner / lapsed / already active &mdash; the segment distinction already on the canvas</td></tr>
+      <tr><td class="fname">Interest tags</td><td>Disciplines and topics (archery, rifle, food/butchering, policy, etc.) &mdash; what discovery is meant to surface</td></tr>
+      <tr><td class="fname">Marketing consent / opt-in status</td><td>Needed regardless of tool, and currently the exact thing that falls through the cracks on unsubscribed registrants</td></tr>
+      <tr><td class="fname">Referred by</td><td>Link to another Person, if word of mouth brought them in</td></tr>
+      <tr><td class="fname">Relationship notes</td><td>Free text, the activity-tracking gap Klaviyo doesn't cover</td></tr>
+    </table></div>
+  </div>
+
+  <div class="entity">
+    <h4>Organization</h4>
+    <p class="purpose">A company, nonprofit, or agency Venery has a relationship with, not an individual. Keeps brands, outfitters, and conservation orgs from getting forced into Person fields that don't fit them. Who represents it is handled by Affiliation below, not a field here.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Organization name, type</td><td>Vendor, outfitter, brand, nonprofit, agency, training company</td></tr>
+      <tr><td class="fname">Notes</td><td>Same activity-tracking function as Person notes, for the organization as a whole</td></tr>
+    </table></div>
+  </div>
+
+  <div class="entity">
+    <h4>Affiliation</h4>
+    <p class="purpose">Links a Person to an Organization. Exists because a single "primary contact" field can't represent an outfitter with three different people Venery deals with, or an independent rep who represents several different brands at once. The same record works in both directions: who represents this organization, and which organizations this person represents.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Person (link), Organization (link)</td><td>Both, always &mdash; this record only exists to connect the two</td></tr>
+      <tr><td class="fname">Role at that organization</td><td>Owner, marketing contact, logistics contact, sales rep</td></tr>
+      <tr><td class="fname">Primary contact (flag)</td><td>Marks the preferred contact without forcing there to be only one</td></tr>
+      <tr><td class="fname">Status</td><td>Active / inactive &mdash; people change jobs; the Affiliation ends, the Person and Organization records don't</td></tr>
+    </table></div>
+  </div>
+
+  <div class="entity">
+    <h4>Membership</h4>
+    <p class="purpose">One active record per Person while they're a member. A role, not a replacement for their Person record.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Tier / level</td><td>The mix of programming, training, and equipment access still to be designed</td></tr>
+      <tr><td class="fname">Start date, renewal date, status</td><td>Active / lapsed / cancelled / paused</td></tr>
+      <tr><td class="fname">Price paid</td><td>May differ from list price for founding members or discounts</td></tr>
+      <tr><td class="fname">Last-active date</td><td>The actual input to the roadmap's repeat-engagement metric</td></tr>
+    </table></div>
+  </div>
+
+  <div class="entity">
+    <h4>Event / Program</h4>
+    <p class="purpose">A class, course, camp, or social &mdash; anything Venery schedules and runs.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Name, type, dates, location, capacity</td><td>Matches the existing category structure (classes, courses, camps, community)</td></tr>
+      <tr><td class="fname">Price / member-benefit flag</td><td>Whether it's ticketed or included in a membership tier</td></tr>
+      <tr><td class="fname">Delivery mode</td><td>Virtual, in-person, hybrid &mdash; already how the financials are organized</td></tr>
+      <tr><td class="fname">Curriculum area</td><td>Technique, land &amp; access, ecosystem/food system, full animal use, policy</td></tr>
+      <tr><td class="fname">Assigned instructor(s)</td><td>Link to Instructor Engagement, which itself links back to a Person</td></tr>
+    </table></div>
+  </div>
+
+  <div class="entity">
+    <h4>Event Registration</h4>
+    <p class="purpose">The join between a Person and an Event. This is the record that's currently going missing.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Event, Contact (links)</td><td>Both, always &mdash; a registration that doesn't create or update a Contact record is exactly today's problem</td></tr>
+      <tr><td class="fname">Payment status, amount paid</td><td>Recorded as an actual transaction against the Contact, not lost inside the event tool</td></tr>
+      <tr><td class="fname">Attendance status</td><td>Registered / attended / no-show / cancelled</td></tr>
+      <tr><td class="fname">Was already subscribed? (flag)</td><td>If not, this is what should trigger an opt-in offer automatically, replacing Alex's manual step</td></tr>
+    </table></div>
+  </div>
+
+  <div class="entity">
+    <h4>Instructor Engagement</h4>
+    <p class="purpose">A role linked to an existing Person, not a separate profile. A member who starts teaching doesn't get duplicated: they get one of these attached to the Person record they already have. An outside expert who isn't a member gets a Person record too, just without a Membership attached to it.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Person (link)</td><td>Always &mdash; there is no instructor who isn't also a Person record</td></tr>
+      <tr><td class="fname">Type</td><td>Peer/TA, member deep-expert, external expert</td></tr>
+      <tr><td class="fname">Discipline</td><td>What they teach</td></tr>
+      <tr><td class="fname">Status</td><td>Exploratory / active &mdash; matches the roadmap's Phase 1 language of conversations before agreements</td></tr>
+      <tr><td class="fname">Compensation arrangement</td><td>Stipend, volunteer, revenue share &mdash; still open on the canvas, but needs a place to live once decided</td></tr>
+    </table></div>
+  </div>
+
+  <div class="entity">
+    <h4>Partner Engagement</h4>
+    <p class="purpose">Vendors, outfitters, and referral partners are usually organizations, but not always: a single individual affiliate is possible too. This links to either a Person or an Organization rather than assuming every partner is a company.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Person or Organization (link)</td><td>Whichever actually applies &mdash; don't force an individual affiliate into an Organization record, or a company into a Person record</td></tr>
+      <tr><td class="fname">Type</td><td>Vendor, outfitter, brand, referral affiliate</td></tr>
+      <tr><td class="fname">Status</td><td>Exploratory / active, same logic as Instructor Engagement</td></tr>
+      <tr><td class="fname">Referral code / link</td><td>What makes commission attribution possible at all</td></tr>
+      <tr><td class="fname">Commission terms</td><td>Still open on the canvas, but needs a place to live once decided</td></tr>
+    </table></div>
+  </div>
+
+  <div class="entity">
+    <h4>Interest Group &amp; Meetup</h4>
+    <p class="purpose">The community layer that doesn't exist today. Two related but different things: an ongoing group and a one-off activity.</p>
+    <div class="table-wrap"><table class="fields">
+      <tr><th>Field</th><th>Why it matters</th></tr>
+      <tr><td class="fname">Topic / interest</td><td>What connects the members in it</td></tr>
+      <tr><td class="fname">Organizer</td><td>Usually a member, not Alex</td></tr>
+      <tr><td class="fname">Members / attendees</td><td>Who's in it or coming</td></tr>
+      <tr><td class="fname">Visibility setting</td><td>Who can see it exists and who's attending &mdash; the privacy requirement from Part 1, made concrete</td></tr>
+    </table></div>
+  </div>
+
+  <h3 class="sub">Core workflows</h3>
+
+  <p class="flow-title">Someone registers for a program <span class="flow-solves">solves Alex's #1 problem</span></p>
+  <ol class="flow">
+    <li>Person registers for an event on the website</li>
+    <li>Their Contact record is created or matched automatically, capturing name, email, and address at the point of registration, not left behind in the event tool</li>
+    <li>An Event Registration record links that Contact to that Event</li>
+    <li>System checks: are they already a subscriber? If not, they're offered opt-in automatically, no manual step for Alex</li>
+    <li>Payment is recorded as a transaction against their Contact record, not just inside the event app</li>
+  </ol>
+
+  <p class="flow-title">Someone becomes a member</p>
+  <ol class="flow">
+    <li>Contact selects a tier and pays</li>
+    <li>Membership record is created and linked to their Contact</li>
+    <li>Tier benefits activate: discounts, content access, community platform access</li>
+    <li>A renewal reminder is scheduled ahead of the renewal date</li>
+  </ol>
+
+  <p class="flow-title">A member finds other members and organizes something</p>
+  <ol class="flow">
+    <li>Member completes a profile: interest tags, location, experience level</li>
+    <li>They become discoverable to other members, within whatever privacy setting they chose</li>
+    <li>They join or create an interest group, or propose a one-off meetup</li>
+    <li>Other members RSVP; the organizer sees who's coming</li>
+  </ol>
+
+  <p class="flow-title">An instructor relationship develops</p>
+  <ol class="flow">
+    <li>An exploratory conversation with a member, or with an outside expert who isn't one yet, is logged as an Instructor Engagement linked to their Person record, status: exploratory</li>
+    <li>If it goes somewhere, status moves to active, with discipline and compensation captured</li>
+    <li>They're assigned to specific Events; delivery is tracked against that assignment</li>
+  </ol>
+
+  <p class="flow-title">A partner relationship develops, and a referral converts</p>
+  <ol class="flow">
+    <li>An exploratory conversation with a vendor, outfitter, or brand, whether that's a company or a single individual, is logged as a Partner Engagement linked to an Organization or a Person, status: exploratory</li>
+    <li>If it goes somewhere, status moves to active and a referral code or link is issued</li>
+    <li>A prospective member or customer uses that code at signup or registration</li>
+    <li>The transaction is attributed back to that Partner Engagement automatically</li>
+    <li>Commission is calculated once the structure (still open on the canvas) is decided</li>
+  </ol>
+
+  <p class="flow-title">Measuring whether it's working <span class="flow-solves">feeds the roadmap's own checkpoint</span></p>
+  <ol class="flow">
+    <li>The system tracks last-active date, attendance frequency, and renewal outcome per Contact</li>
+    <li>Reporting rolls this up into the two specific numbers the build-out roadmap already committed to: renewal/repeat-engagement rate and channel conversion rate</li>
+    <li>That is the same data the roadmap's Measure &amp; Decide checkpoint uses to decide whether to persevere or revisit, at the end of Phase 2</li>
+  </ol>
+
+  <div class="note">
+    <strong>What's deliberately not here</strong>
+    No platform names, no cost estimates, no build-vs-buy opinion. Once this list holds up in conversation with Alex, the next step is evaluating how existing tools, a different combination of them, or a custom-built approach each measure up against it, not the other way around.
+  </div>
+
+  <footer class="doc-footer">Venery Technology Requirements &middot; discussion draft &middot; not a platform recommendation</footer>
+</div>
+
+<script type="application/json" class="js-hypothesis-config">
+{
+  "showHighlights": true,
+  "theme": "clean"
+}
+</script>
+<script async src="https://hypothes.is/embed.js"></script>
+
+</body></html>
